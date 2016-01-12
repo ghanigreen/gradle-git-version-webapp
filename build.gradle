@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.10'
+}
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.ajoberstar:grgit:1.4.1'
+    }
+
+}
+
+task generateVersionProperties << {
+    def git = org.ajoberstar.grgit.Grgit.open(file('.'))
+    def commit = git.head()
+    
+    def commitId = commit.id
+    def commitDate = commit.getDate()
+    def buildDate = new Date()
+
+    File resourcesDir = new File(project.getBuildDir(), 'resources/main')
+    File propertiesFile = new File(resourcesDir, 'version.properties')
+
+    // The project may not have any resources, so create the directories and file
+    if(!propertiesFile.exists()) {
+        resourcesDir.mkdirs()
+        propertiesFile.createNewFile()
+    }
+    propertiesFile.text = """git.commit.id=${commitId}
+git.commit.time=${commitDate.format('dd.MM.yyyy HH:mm:ss')}
+build.time=${buildDate.format('dd.MM.yyyy HH:mm:ss')}
+"""
+}
+
+project.tasks.war.dependsOn('generateVersionProperties')
