@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="ggvApp">
+<head>
+<title>Gradle-Git Power</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+</head>
+
+<body>
+<div ng-controller="VersionController">
+	<p>Git commit ID: {{commitInfo["git.commit.id"]}}</p>
+	<p>Git commit time: {{commitInfo["git.commit.time"]}}</p>
+	<p>Application build time: {{commitInfo["build.time"]}}</p>
+</div>
+
+<script>
+var ggvApp = angular.module('ggvApp',[]);
+
+ggvApp.controller('VersionController', ['$scope', '$http', function($scope, $http) {
+    $http.get('version').
+    success(function(data) {
+        $scope.commitInfo = data;
+    });
+}]);
+</script>
+</body>
+</html>

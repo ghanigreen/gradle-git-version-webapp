@@ -1,6 +1,24 @@
 apply plugin: 'java'
-apply plugin: 'war'
 apply plugin: 'eclipse'
+apply plugin: 'war'
+apply plugin: 'jetty'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile 'com.google.code.gson:gson:2.5'
+}
+
+war.archiveName = 'ggv.war'
+
+jettyRun.contextPath = 'ggv'
+jettyRunWar.contextPath = 'ggv'
 
 task wrapper(type: Wrapper) {
    gradleVersion = '2.10'
@@ -34,6 +52,7 @@ task generateVersionProperties << {
         resourcesDir.mkdirs()
         propertiesFile.createNewFile()
     }
+    
     propertiesFile.text = """git.commit.id=${commitId}
 git.commit.time=${commitDate.format('dd.MM.yyyy HH:mm:ss')}
 build.time=${buildDate.format('dd.MM.yyyy HH:mm:ss')}
