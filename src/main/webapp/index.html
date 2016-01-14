@@ -1,15 +1,15 @@
 <!doctype html>
 <html ng-app="ggvApp">
 <head>
-<title>Gradle-Git Power</title>
+<title>Gradle Git Version</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
 </head>
 
 <body>
 <div ng-controller="VersionController">
-	<p>Git commit ID: {{commitInfo["git.commit.id"]}}</p>
-	<p>Git commit time: {{commitInfo["git.commit.time"]}}</p>
-	<p>Application build time: {{commitInfo["build.time"]}}</p>
+	<p>Git commit ID: {{ commitInfo["git.commit.id"] }}</p>
+	<p>Git commit time: {{ commitInfo["git.commit.time"] }}</p>
+	<p>Build time: {{ commitInfo["build.time"] }}</p>
 </div>
 
 <script>

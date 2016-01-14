@@ -1,4 +1,4 @@
-package io.github.skomarica.contrib.web.servlet;
+package io.github.skomarica.ggv.webapp.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;

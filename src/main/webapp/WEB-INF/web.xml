@@ -7,7 +7,7 @@
 
 	<servlet>
 		<servlet-name>version</servlet-name>
-		<servlet-class>io.github.skomarica.contrib.web.servlet.VersionServlet</servlet-class>
+		<servlet-class>io.github.skomarica.ggv.webapp.servlet.VersionServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
